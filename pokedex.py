@@ -1,35 +1,44 @@
 import argparse
+from facade import Facade, Request
 
 
-def main(some_args):
-    print("in main: ", some_args.inputfile)
+def main(request: Request):
+    facade = Facade()
+    facade.execute_request(request)
 
-def parse_arguments():
+
+def parse_arguments() -> Request:
     parser = argparse.ArgumentParser()
 
     mode_group = parser.add_mutually_exclusive_group()
-    mode_group.add_argument("--pokemon", action="store_true")
-    mode_group.add_argument("--ability", action="store_true")
-    mode_group.add_argument("--move", type=int, help="the base")
+    mode_group.add_argument("--pokemon", action="store_const", dest="mode", const="pokemon", help="The id or the name of a pokemon.")
+    mode_group.add_argument("--ability",  action="store_const", dest="mode", const="ability",  help="The id or the name of an ability")
+    mode_group.add_argument("--move",  action="store_const", dest="mode", const="move",  help="The id or the name of a pokemon move")
 
     file_group = parser.add_mutually_exclusive_group()
-    file_group.add_argument("--inputfile", metavar='text')
-    file_group.add_argument("--inputdata", metavar='text')
+    file_group.add_argument("--inputfile", help="The file that contains the names or ids of a pokemon, ability or move")
+    file_group.add_argument("--inputdata", help='The string containing the name or id of a pokemon, ability or move')
+    print(f"file group {file_group}")
 
+    parser.add_argument("--expanded", help="If this flag is provided, certain attributes are expanded with more information")
 
-    parser.add_argument("--expanded", help="increase output verbosity",
-                        action="store_true")
+    parser.add_argument("--output", default="print", help="The output of the program. This is 'print' by "
+                             "default, but can be set to a file name as well.")
 
-    args = parser.parse_args()
-    if args.expanded:
-        print("expanded turned on")
-    if args.inputfile:
-        print(args.inputfile)
-    return args
+    try:
+        args = parser.parse_args()
+        print(f"args {args}")
+        request = Request()
+        request.mode = args.mode
+        request.input_file = args.inputfile
+        request.input_data = args.inputdata
+        request.expanded = args.expanded
+        request.output = args.output
+        return request
+    except Exception as e:
+        print(f"Error! Could not read arguments.\n{e}")
+        quit()
 
 if __name__ == '__main__':
-    arguments = parse_arguments()
-    main(*arguments)
-
-
-
+    request = parse_arguments()
+    main(request)
