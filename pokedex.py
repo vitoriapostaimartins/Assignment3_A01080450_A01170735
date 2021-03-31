@@ -11,9 +11,9 @@ def parse_arguments() -> Request:
     parser = argparse.ArgumentParser()
 
     mode_group = parser.add_mutually_exclusive_group()
-    mode_group.add_argument("--pokemon", action="store_const", dest="mode", const="pokemon", help="The id or the name of a pokemon.")
-    mode_group.add_argument("--ability",  action="store_const", dest="mode", const="ability",  help="The id or the name of an ability")
-    mode_group.add_argument("--move",  action="store_const", dest="mode", const="move",  help="The id or the name of a pokemon move")
+    mode_group.add_argument("pokemon", action="store_const", dest="mode", const="pokemon", help="The id or the name of a pokemon.")
+    mode_group.add_argument("ability",  action="store_const", dest="mode", const="ability",  help="The id or the name of an ability")
+    mode_group.add_argument("move",  action="store_const", dest="mode", const="move",  help="The id or the name of a pokemon move")
 
     file_group = parser.add_mutually_exclusive_group()
     file_group.add_argument("--inputfile", help="The file that contains the names or ids of a pokemon, ability or move")
