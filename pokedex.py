@@ -20,7 +20,7 @@ def parse_arguments() -> Request:
     file_group.add_argument("--inputdata", help='The string containing the name or id of a pokemon, ability or move')
     print(f"file group {file_group}")
 
-    parser.add_argument("--expanded", help="If this flag is provided, certain attributes are expanded with more information")
+    parser.add_argument("--expanded", action = "store_true", help="If this flag is provided, certain attributes are expanded with more information")
 
     parser.add_argument("--output", default="print", help="The output of the program. This is 'print' by "
                              "default, but can be set to a file name as well.")
