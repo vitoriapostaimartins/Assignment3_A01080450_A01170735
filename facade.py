@@ -1,8 +1,6 @@
 import asyncio
 import enum
 
-import pokeretriever
-from pokeretriever import request_handler
 from pokeretriever.pokedex_object import PokedexObject
 from pokeretriever.pokedex_object_factory import PokedexObjectFactory, PokemonFactory, AbilityFactory, MoveFactory
 from pokeretriever.request_handler import RequestHandler
@@ -33,13 +31,23 @@ class Facade:
         request_handler = RequestHandler()
 
         loop = asyncio.get_event_loop()
+        pokedex_objects = []
 
-        response = loop.run_until_complete(request_handler.process_request(request))
+        # Process list of requests to get list of responses
+        responses = loop.run_until_complete(request_handler.process_requests(request))
+        print(responses)
+
+        # Get factory for mode passed in
         factory = self._get_pokedex_factory(request)
         print("factory: ", factory)
-        pokedex_object = factory.create_pokedex_object(**response)
-        print("\nPrinting Pokedex Object")
-        print(pokedex_object)
+
+        # Create a pokedex object for each response, using the factory
+        for response in responses:
+            pokedex_object = factory.create_pokedex_object(request.expanded, **response)
+            pokedex_objects.append(pokedex_object)
+            print("\nPrinting Pokedex Object")
+            print(pokedex_object)
+
 
     def _get_pokedex_factory(self, request) -> PokedexObjectFactory:
         pokedex_factories = {

@@ -10,27 +10,27 @@ from pokeretriever.stat import PokemonStat
 class PokedexObjectFactory(abc.ABC):
 
     @abc.abstractmethod
-    def create_pokedex_object(self, **kwargs) -> PokedexObject:
+    def create_pokedex_object(self, expanded, **kwargs) -> PokedexObject:
         pass
 
 
 class AbilityFactory(PokedexObjectFactory):
 
-    def create_pokedex_object(self, **kwargs) -> PokedexObject:
-        return PokemonAbility(**kwargs)
+    def create_pokedex_object(self, expanded, **kwargs) -> PokedexObject:
+        return PokemonAbility(expanded, **kwargs)
 
 
 class PokemonFactory(PokedexObjectFactory):
 
-    def create_pokedex_object(self, **kwargs) -> PokedexObject:
-        return Pokemon(**kwargs)
+    def create_pokedex_object(self, expanded, **kwargs) -> PokedexObject:
+        return Pokemon(expanded, **kwargs)
 
 
 class MoveFactory(PokedexObjectFactory):
-    def create_pokedex_object(self, **kwargs) -> PokedexObject:
-        return PokemonMove(**kwargs)
+    def create_pokedex_object(self, expanded, **kwargs) -> PokedexObject:
+        return PokemonMove(expanded, **kwargs)
 
 
 class StatFactory(PokedexObjectFactory):
-    def create_pokedex_object(self, **kwargs) -> PokedexObject:
-        return PokemonStat(**kwargs)
+    def create_pokedex_object(self, expanded, **kwargs) -> PokedexObject:
+        return PokemonStat(expanded, **kwargs)

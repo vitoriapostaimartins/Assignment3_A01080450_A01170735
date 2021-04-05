@@ -2,7 +2,9 @@ from pokeretriever.pokedex_object import PokedexObject
 
 
 class PokemonMove(PokedexObject):
-    def __init__(self, **kwargs):
+
+    def __init__(self, expanded, **kwargs):
+        super().__init__(expanded, **kwargs)
         self._generation = kwargs.get("generation").get("name")
         self._accuracy = kwargs.get("accuracy")
         self._pp = kwargs.get("pp")
@@ -10,7 +12,7 @@ class PokemonMove(PokedexObject):
         self._type = kwargs.get("type")
         self._damage_class = kwargs.get("damage_class")
         self._effect_short = super().get_effect("short_effect", **kwargs)
-        super().__init__(**kwargs)
+
 
     def __str__(self):
         return f"Name: {self._name}, " \

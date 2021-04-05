@@ -2,18 +2,20 @@ from pokeretriever.pokedex_object import PokedexObject
 
 
 class Pokemon(PokedexObject):
-    def __init__(self, **kwargs):
-        self._expanded = True
+    def __init__(self, expanded, **kwargs):
+        super().__init__(expanded, **kwargs)
         self._height = kwargs.get("height")
         self._weight = kwargs.get("weight")
         self._stats = super().get_stats(**kwargs)
-        self._types = super().get_types(self._expanded, **kwargs)
+        self._types = super().get_types(**kwargs)
         self._abilities = super().get_abilities(**kwargs)
         self._moves = super().get_moves(**kwargs)
-        super().__init__(**kwargs)
+
 
     def __str__(self):
-        return f"Height: {self._height} decimetres\n" \
+        return f"Name: {self._name}\n"\
+               f"Id: {self._id} \n" \
+               f"Height: {self._height} decimetres\n" \
                f"Weight: {self._weight} hectograms\n" \
                f"Stats: {self._stats}\n" \
                f"Types: {self._types}\n" \
