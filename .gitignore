@@ -1,2 +1,5 @@
 /__pycache__
 /pokeretriever/__pycache__
+
+*.pyc
+*.pyo
