@@ -27,38 +27,12 @@ class Request:
 
 class Facade:
 
-    def execute_request(self, request: Request) -> PokedexObject:
+    def execute_request(self, request: Request) -> list:
         request_handler = RequestHandler()
-
-        loop = asyncio.get_event_loop()
-        pokedex_objects = []
-
-        # Process list of requests to get list of responses
-        responses = loop.run_until_complete(request_handler.process_requests(request))
-        print(responses)
-
-        # Get factory for mode passed in
-        factory = self._get_pokedex_factory(request)
-        print("factory: ", factory)
-
-        # Create a pokedex object for each response, using the factory
-        for response in responses:
-            pokedex_object = factory.create_pokedex_object(request.expanded, **response)
-            pokedex_objects.append(pokedex_object)
-            print("\nPrinting Pokedex Object")
-            print(pokedex_object)
+        pokedex_objects = request_handler.execute_request(request) # list
+        return pokedex_objects
 
 
-    def _get_pokedex_factory(self, request) -> PokedexObjectFactory:
-        pokedex_factories = {
-            PokedexModes.POKEMON.value: PokemonFactory(),
-            PokedexModes.ABILITY.value: AbilityFactory(),
-            PokedexModes.MOVE.value: MoveFactory()
-        }
-        return pokedex_factories[request.mode]
 
 
-class PokedexModes(enum.Enum):
-    POKEMON = "pokemon"
-    ABILITY = "ability"
-    MOVE = "move"
+

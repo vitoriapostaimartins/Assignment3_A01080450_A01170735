@@ -80,6 +80,9 @@ class PokedexObject(abc.ABC):
 
         return moves
 
+    def _get_move_object(self, url) :
+        pass
+
     def get_types(self, **kwargs):
         types_list = kwargs.get("types")
         type_names = []
