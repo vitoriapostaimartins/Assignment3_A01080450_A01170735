@@ -1,8 +1,8 @@
 import asyncio
 import enum
 
-from pokeretriever.pokedex_object import PokedexObject
-from pokeretriever.pokedex_object_factory import PokedexObjectFactory, PokemonFactory, AbilityFactory, MoveFactory
+# from pokeretriever.pokedex_object import PokedexObject
+# from pokeretriever.pokedex_object_factory import PokedexObjectFactory, PokemonFactory, AbilityFactory, MoveFactory
 from pokeretriever.request_handler import RequestHandler
 
 

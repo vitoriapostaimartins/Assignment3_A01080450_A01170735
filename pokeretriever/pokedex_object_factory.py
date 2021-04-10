@@ -1,8 +1,8 @@
 import abc
 
+from pokeretriever.pokedex_object import PokedexObject
 from pokeretriever.ability import PokemonAbility
 from pokeretriever.move import PokemonMove
-from pokeretriever.pokedex_object import PokedexObject
 from pokeretriever.pokemon import Pokemon
 from pokeretriever.stat import PokemonStat
 

@@ -1,7 +1,13 @@
 import abc
+import asyncio
+
+from pokeretriever import request_handler
 
 
 class PokedexObject(abc.ABC):
+
+    loop = asyncio.get_event_loop()
+
     def __init__(self, expanded, **kwargs):
         self._name = kwargs.get("name")
         self._id = kwargs.get("id")
@@ -42,10 +48,11 @@ class PokedexObject(abc.ABC):
             base_value = stat.get("base_stat")
             url = stat.get("stat").get("url")
             if not self._expanded:
-                stats.append({"name":name, "base value": base_value})
+                stats.append({"name": name, "base value": base_value})
             else:
-                stats.append({"name":name, "base value": base_value, "url": url})
-
+                # loop = asyncio.get_event_loop()
+                stat = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "stat"))
+                stats.append(stat)
         return stats
 
     def get_abilities(self, **kwargs):
@@ -59,7 +66,9 @@ class PokedexObject(abc.ABC):
             if not self._expanded:
                 abilities.append({"name": name})
             else:
-                abilities.append({"name": name, "url": url})
+                # loop = asyncio.get_event_loop()
+                ability = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "ability"))
+                abilities.append(ability)
 
         return abilities
 
@@ -71,16 +80,16 @@ class PokedexObject(abc.ABC):
         for move in moves_list:
             name = move.get("move").get("name")
             url = move.get("move").get("url")
-            level_learnt = 3 # move.get("version_group_details").get("level_learned_at") #TODO which one to get?
-
+            level_learnt = move.get("version_group_details")[0].get("level_learned_at")
             if not self._expanded:
                 moves.append({"name": name, "level_learnt": level_learnt})
             else:
-                moves.append({"name": name, "level_learnt": level_learnt, "url": url})
+                move = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "move"))
+                moves.append(move)
 
         return moves
 
-    def _get_move_object(self, url) :
+    def _get_move_object(self, url):
         pass
 
     def get_types(self, **kwargs):

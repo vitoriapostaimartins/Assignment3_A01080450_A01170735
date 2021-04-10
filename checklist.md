@@ -2,8 +2,8 @@
 
 ##
 - [ ] Jeff's notes:
-    - [ ] mutually exclusive choices
-    - [ ] pick the first version in the list and store the leve_learned_at from there
+    - [x] mutually exclusive choices
+    - [ ] pick the first version in the list and store the level_learned_at from there
 
 ## Implementation Requirements
 ### Console Output

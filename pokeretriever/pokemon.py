@@ -1,3 +1,5 @@
+import asyncio
+
 from pokeretriever.pokedex_object import PokedexObject
 
 
@@ -11,9 +13,8 @@ class Pokemon(PokedexObject):
         self._abilities = super().get_abilities(**kwargs)
         self._moves = super().get_moves(**kwargs)
 
-
     def __str__(self):
-        return f"Name: {self._name}\n"\
+        return f"Name: {self._name}\n" \
                f"Id: {self._id} \n" \
                f"Height: {self._height} decimetres\n" \
                f"Weight: {self._weight} hectograms\n" \
