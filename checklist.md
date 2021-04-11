@@ -1,9 +1,9 @@
 # Assignment 3 Checklist
 
 ##
-- [ ] Jeff's notes:
+- [x] Jeff's notes:
     - [x] mutually exclusive choices
-    - [ ] pick the first version in the list and store the level_learned_at from there
+    - [x] pick the first version in the list and store the level_learned_at from there
 
 ## Implementation Requirements
 ### Console Output
@@ -11,7 +11,7 @@
 
 ### Parseing Arguments
 - [x] input file
-- [ ] output file
+- [x] output file
 
 ### API Queries
 - [x] Query for Pokemon Data
@@ -23,13 +23,13 @@
     - create a PokemonMove object
 
 ### Expanded Arguments
-- [ ] query API for expanded
+- [x] query API for expanded
 
 ### Printing a Report
-- [ ] file
-- [ ] console
+- [x] file
+- [x] console
 - [ ] format is nicely
-- [ ] append information from subqueries if expanded
+- [x] append information from subqueries if expanded
 - [ ] create a tuple out of key-value pairs
     - e.g. `Move name: move_value`
 - [ ] output error if there is one
@@ -39,4 +39,4 @@
     - create aiohttp session and execute requests
     - parse JSON and instantiate appropriate object
     - Pokemon, Ability, Move and Stat Classes
-- [] facade provides interface to `pokeretriever` package
+- [x] facade provides interface to `pokeretriever` package

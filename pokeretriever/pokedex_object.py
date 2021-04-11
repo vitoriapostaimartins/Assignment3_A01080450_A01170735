@@ -4,6 +4,7 @@ import abc
 class PokedexObject(abc.ABC):
 
     def __init__(self, expanded, **kwargs):
+        self.error = None
         self._name = kwargs.get("name")
         self._id = kwargs.get("id")
         self._expanded = expanded

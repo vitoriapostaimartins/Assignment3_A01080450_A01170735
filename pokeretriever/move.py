@@ -22,4 +22,4 @@ class PokemonMove(PokedexObject):
                f"Power: {self._power} \n" \
                f"Type: {self._type} \n" \
                f"Damage Class: {self._damage_class} \n" \
-               f"Effect Short: {self._effect_short} \n"
+               f"Effect Short: {self._effect_short}"

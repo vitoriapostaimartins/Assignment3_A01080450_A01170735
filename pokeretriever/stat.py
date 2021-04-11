@@ -26,7 +26,7 @@ class PokemonStat(PokedexObject):
         return f"\nName: {self.name}\n" \
                f"ID: {self.id}\n" \
                f"Is Battle Only: {self.is_battle_only} \n" \
-               f"Move Damage Class: {self.move_damage_class} \n"
+               f"Move Damage Class: {self.move_damage_class}"
 
 
 

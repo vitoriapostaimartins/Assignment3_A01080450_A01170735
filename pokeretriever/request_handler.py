@@ -2,6 +2,7 @@ import asyncio
 import enum
 
 import aiohttp
+from aiohttp import ContentTypeError
 
 from pokeretriever.pokedex_object_factory import PokedexObjectFactory, MoveFactory, AbilityFactory, PokemonFactory, \
     StatFactory
@@ -12,6 +13,11 @@ class PokedexModes(enum.Enum):
     ABILITY = "ability"
     MOVE = "move"
     STAT = "stat"
+
+
+class BadRequestError(Exception):
+    def __init__(self):
+        super().__init__("An error occurred. Skipping this request.")
 
 
 class RequestHandler:
@@ -30,12 +36,14 @@ class RequestHandler:
 
         response = await session.request(method="GET", url=target_url)
 
+        if response.status == 404:
+            raise BadRequestError()
+
+
         json_dict = await response.json()
 
         # Get factory for mode passed in
         factory = RequestHandler.get_pokedex_factory(request.mode)
-        # pokedex_object = factory.create_pokedex_object(request.expanded, **json_dict)
-        # return pokedex_object
 
         return RequestHandler._make_pokedex_object(request.expanded, factory, **json_dict)
 
@@ -53,6 +61,8 @@ class RequestHandler:
             target_url = url
 
             response = await session.request(method="GET", url=target_url)
+
+            # if response.status == '404':
 
             json_dict = await response.json()
 
@@ -82,6 +92,7 @@ class RequestHandler:
         # Process list of requests to get list of responses
         pokedex_objects = loop.run_until_complete(RequestHandler.process_requests(request))
 
+
         for pokedex_object in pokedex_objects:
             if pokedex_object.expanded:
                 loop.run_until_complete(RequestHandler.make_expanded_objects(pokedex_object))
@@ -102,24 +113,25 @@ class RequestHandler:
         pokedex_object.abilities = abilities
         pokedex_object.moves = moves
         pokedex_object.stats = stats
-        print(str)
 
     @staticmethod
     async def make_abilities(pokedex_object):
-        async_coroutines = [RequestHandler.get_expanded_object(ability.get("url"), PokedexModes.ABILITY.value) for ability in pokedex_object.abilities]
+        async_coroutines = [RequestHandler.get_expanded_object(ability.get("url"), PokedexModes.ABILITY.value) for
+                            ability in pokedex_object.abilities]
         abilities = await asyncio.gather(*async_coroutines)
         return abilities
 
-
     @staticmethod
     async def make_moves(pokedex_object):
-        async_coroutines = [RequestHandler.get_expanded_object(move.get("url"), PokedexModes.MOVE.value) for move in pokedex_object.moves]
+        async_coroutines = [RequestHandler.get_expanded_object(move.get("url"), PokedexModes.MOVE.value) for move in
+                            pokedex_object.moves]
         moves = await asyncio.gather(*async_coroutines)
         return moves
 
     @staticmethod
     async def make_stats(pokedex_object):
-        async_coroutines = [RequestHandler.get_expanded_object(stat.get("url"), PokedexModes.STAT.value) for stat in pokedex_object.stats]
+        async_coroutines = [RequestHandler.get_expanded_object(stat.get("url"), PokedexModes.STAT.value) for stat in
+                            pokedex_object.stats]
         stats = await asyncio.gather(*async_coroutines)
         return stats
 
@@ -140,14 +152,17 @@ class RequestHandler:
         async with aiohttp.ClientSession() as session:
             print("Getting pokemon")
 
+
             # process each request
             async_coroutines = [RequestHandler.get_pokedex_object(input, request, url, session)
                                 for input in inputs]
+            responses = []
 
-            responses = await asyncio.gather(*async_coroutines)
+            try:
+                responses = await asyncio.gather(*async_coroutines)
+            except BadRequestError as e:
+                print(e)
 
-            # for response in responses:
-            #     print(response)
             return responses
 
     @staticmethod
@@ -164,5 +179,3 @@ class RequestHandler:
         for i in data:
             input.append(i.rstrip("\n"))
         return input
-
-

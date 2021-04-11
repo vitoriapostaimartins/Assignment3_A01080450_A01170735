@@ -10,16 +10,7 @@ def main(request: Request):
 def parse_arguments() -> Request:
     parser = argparse.ArgumentParser()
 
-    # TODO figure out how to add mutually exclusive args without the --
-    # mode_group = parser.add_mutually_exclusive_group()
     parser.add_argument("mode", choices=["pokemon", "ability", "move"])
-
-    # mode_group.add_argument("pokemon", action="store_const", const="pokemon", help="The id or the name "
-    #                                                                                             "of a pokemon.")
-    # mode_group.add_argument("ability",  action="store_const", const="ability",  help="The id or the name "
-    #                                                                                               "of an ability")
-    # mode_group.add_argument("move",  action="store_const",  const="move",  help="The id or the name of a "
-    #                                                                                         "pokemon move")
 
     file_group = parser.add_mutually_exclusive_group()
     file_group.add_argument("--inputfile", help="The file that contains the names or ids of a pokemon, ability or move")
