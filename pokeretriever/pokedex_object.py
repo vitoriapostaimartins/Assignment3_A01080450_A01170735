@@ -1,17 +1,24 @@
 import abc
-import asyncio
-
-from pokeretriever import request_handler
 
 
 class PokedexObject(abc.ABC):
-
-    loop = asyncio.get_event_loop()
 
     def __init__(self, expanded, **kwargs):
         self._name = kwargs.get("name")
         self._id = kwargs.get("id")
         self._expanded = expanded
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def expanded(self):
+        return self._expanded
 
     def get_effect(self, effect_string, **kwargs) -> str:
         effect_entries = kwargs.get("effect_entries")
@@ -50,9 +57,7 @@ class PokedexObject(abc.ABC):
             if not self._expanded:
                 stats.append({"name": name, "base value": base_value})
             else:
-                # loop = asyncio.get_event_loop()
-                stat = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "stat"))
-                stats.append(stat)
+                stats.append({"name": name, "base value": base_value, "url": url})
         return stats
 
     def get_abilities(self, **kwargs):
@@ -66,9 +71,7 @@ class PokedexObject(abc.ABC):
             if not self._expanded:
                 abilities.append({"name": name})
             else:
-                # loop = asyncio.get_event_loop()
-                ability = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "ability"))
-                abilities.append(ability)
+                abilities.append({"name": name, "url": url})
 
         return abilities
 
@@ -84,8 +87,7 @@ class PokedexObject(abc.ABC):
             if not self._expanded:
                 moves.append({"name": name, "level_learnt": level_learnt})
             else:
-                move = PokedexObject.loop.run_until_complete(request_handler.RequestHandler.get_expanded_object(url, "move"))
-                moves.append(move)
+                moves.append({"name": name, "level_learnt": level_learnt, "url": url})
 
         return moves
 

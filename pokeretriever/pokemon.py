@@ -13,12 +13,41 @@ class Pokemon(PokedexObject):
         self._abilities = super().get_abilities(**kwargs)
         self._moves = super().get_moves(**kwargs)
 
+    @property
+    def abilities(self):
+        return self._abilities
+
+    @abilities.setter
+    def abilities(self, abilities):
+        self._abilities = abilities
+
+    @property
+    def moves(self):
+        return self._moves
+
+    @moves.setter
+    def moves(self, moves):
+        self._moves = moves
+
+    @property
+    def stats(self):
+        return self._stats
+
+    @stats.setter
+    def stats(self, stats):
+        self._stats = stats
+
     def __str__(self):
-        return f"Name: {self._name}\n" \
+        abilities_str = "\n".join([str(ability) for ability in self.abilities])
+        moves_str = " \n".join([str(move) for move in self.moves])
+        stats_str = "\n".join([str(stat) for stat in self.stats])
+        types = ", ".join(self._types)
+
+        return f"\nName: {self._name}\n" \
                f"Id: {self._id} \n" \
                f"Height: {self._height} decimetres\n" \
                f"Weight: {self._weight} hectograms\n" \
-               f"Stats: {self._stats}\n" \
-               f"Types: {self._types}\n" \
-               f"Abilities: {self._abilities} \n" \
-               f"Moves: {self._moves}"
+               f"Types: {types}\n" \
+               f"Stats: {stats_str}\n" \
+               f"Abilities: {abilities_str} \n" \
+               f"Moves: {moves_str}"

@@ -27,11 +27,8 @@ class RequestHandler:
         """
 
         target_url = url.format(request.mode, input)
-        print(target_url)
 
         response = await session.request(method="GET", url=target_url)
-
-        print("Response from aiohttp: \\n", response)
 
         json_dict = await response.json()
 
@@ -40,7 +37,7 @@ class RequestHandler:
         # pokedex_object = factory.create_pokedex_object(request.expanded, **json_dict)
         # return pokedex_object
 
-        return RequestHandler._make_pokedex_object(request, factory, **json_dict)
+        return RequestHandler._make_pokedex_object(request.expanded, factory, **json_dict)
 
     @staticmethod
     async def get_expanded_object(url: str, mode) -> dict:
@@ -54,21 +51,18 @@ class RequestHandler:
         """
         async with aiohttp.ClientSession() as session:
             target_url = url
-            print(target_url)
 
             response = await session.request(method="GET", url=target_url)
-
-            print("Response from aiohttp: \\n", response)
 
             json_dict = await response.json()
 
             # Get factory for mode passed in
             factory = RequestHandler.get_pokedex_factory(mode)
-            return RequestHandler._make_pokedex_object(mode, factory, **json_dict)
+            return RequestHandler._make_pokedex_object(True, factory, **json_dict)
 
     @staticmethod
-    def _make_pokedex_object(request, factory, **kwargs):
-        pokedex_object = factory.create_pokedex_object(request.expanded, **kwargs)
+    def _make_pokedex_object(expanded, factory, **kwargs):
+        pokedex_object = factory.create_pokedex_object(expanded, **kwargs)
         return pokedex_object
 
     @staticmethod
@@ -84,14 +78,50 @@ class RequestHandler:
     @staticmethod
     def execute_request(request) -> list:
         loop = asyncio.get_event_loop()
-        pokedex_objects = []
 
         # Process list of requests to get list of responses
-        responses = loop.run_until_complete(RequestHandler.process_requests(request))
-        for r in responses:
-            print("responses: ", r)
+        pokedex_objects = loop.run_until_complete(RequestHandler.process_requests(request))
 
-        return responses
+        for pokedex_object in pokedex_objects:
+            if pokedex_object.expanded:
+                loop.run_until_complete(RequestHandler.make_expanded_objects(pokedex_object))
+
+        return pokedex_objects
+
+    @staticmethod
+    async def make_expanded_objects(pokedex_object):
+        # abilities
+        abilities = await RequestHandler.make_abilities(pokedex_object)
+
+        # moves
+        moves = await RequestHandler.make_moves(pokedex_object)
+
+        # stats
+        stats = await RequestHandler.make_stats(pokedex_object)
+
+        pokedex_object.abilities = abilities
+        pokedex_object.moves = moves
+        pokedex_object.stats = stats
+        print(str)
+
+    @staticmethod
+    async def make_abilities(pokedex_object):
+        async_coroutines = [RequestHandler.get_expanded_object(ability.get("url"), PokedexModes.ABILITY.value) for ability in pokedex_object.abilities]
+        abilities = await asyncio.gather(*async_coroutines)
+        return abilities
+
+
+    @staticmethod
+    async def make_moves(pokedex_object):
+        async_coroutines = [RequestHandler.get_expanded_object(move.get("url"), PokedexModes.MOVE.value) for move in pokedex_object.moves]
+        moves = await asyncio.gather(*async_coroutines)
+        return moves
+
+    @staticmethod
+    async def make_stats(pokedex_object):
+        async_coroutines = [RequestHandler.get_expanded_object(stat.get("url"), PokedexModes.STAT.value) for stat in pokedex_object.stats]
+        stats = await asyncio.gather(*async_coroutines)
+        return stats
 
     @staticmethod
     async def process_requests(request):
@@ -110,16 +140,14 @@ class RequestHandler:
         async with aiohttp.ClientSession() as session:
             print("Getting pokemon")
 
-            print(url)
-
             # process each request
             async_coroutines = [RequestHandler.get_pokedex_object(input, request, url, session)
                                 for input in inputs]
 
             responses = await asyncio.gather(*async_coroutines)
 
-            for response in responses:
-                print(response)
+            # for response in responses:
+            #     print(response)
             return responses
 
     @staticmethod

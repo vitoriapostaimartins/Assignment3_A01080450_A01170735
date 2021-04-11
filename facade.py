@@ -30,6 +30,8 @@ class Facade:
     def execute_request(self, request: Request) -> list:
         request_handler = RequestHandler()
         pokedex_objects = request_handler.execute_request(request) # list
+        for pokedex_object in pokedex_objects:
+            print(str(pokedex_object))
         return pokedex_objects
 
 
