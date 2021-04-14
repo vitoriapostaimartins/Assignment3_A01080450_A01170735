@@ -43,11 +43,11 @@ class Pokemon(PokedexObject):
         stats_str = "\n".join([str(stat) for stat in self.stats])
         types = ", ".join(self._types)
 
-        return f"\n\nName: {self._name}\n" \
+        return f"\nName: {self._name}\n" \
                f"Id: {self._id} \n" \
                f"Height: {self._height} decimetres\n" \
                f"Weight: {self._weight} hectograms\n" \
                f"Types: {types}\n\n" \
                f"Stats:\n------\n{stats_str}\n\n" \
                f"Abilities:\n------\n{abilities_str} \n\n" \
-               f"Moves:\n------\n{moves_str}"
+               f"Moves:\n------\n{moves_str}\n"

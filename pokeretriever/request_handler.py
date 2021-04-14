@@ -1,8 +1,10 @@
 import asyncio
 import enum
+import os
 
 import aiohttp
 from aiohttp import ContentTypeError
+from pathlib import Path
 
 from pokeretriever.pokedex_object_factory import PokedexObjectFactory, MoveFactory, AbilityFactory, PokemonFactory, \
     StatFactory
@@ -38,7 +40,6 @@ class RequestHandler:
 
         if response.status == 404:
             raise BadRequestError()
-
 
         json_dict = await response.json()
 
@@ -92,10 +93,12 @@ class RequestHandler:
         # Process list of requests to get list of responses
         pokedex_objects = loop.run_until_complete(RequestHandler.process_requests(request))
 
-
         for pokedex_object in pokedex_objects:
-            if pokedex_object.expanded:
-                loop.run_until_complete(RequestHandler.make_expanded_objects(pokedex_object))
+            try:
+                if pokedex_object.expanded:
+                    loop.run_until_complete(RequestHandler.make_expanded_objects(pokedex_object))
+            except AttributeError:
+                continue
 
         return pokedex_objects
 
@@ -138,30 +141,28 @@ class RequestHandler:
     @staticmethod
     async def process_requests(request):
         """
-
         :param request:
         :return:
         """
         inputs = []
         if request.input_data:
             inputs.append(request.input_data)
-        else:
+        elif request.input_file:
             inputs = RequestHandler.get_input_list(request)
+        else:
+            print("No input data or input file found. Please try again.")
+            quit()
 
         url = "https://pokeapi.co/api/v2/{}/{}/"
         async with aiohttp.ClientSession() as session:
             print("Getting pokemon")
-
 
             # process each request
             async_coroutines = [RequestHandler.get_pokedex_object(input, request, url, session)
                                 for input in inputs]
             responses = []
 
-            try:
-                responses = await asyncio.gather(*async_coroutines)
-            except BadRequestError as e:
-                print(e)
+            responses = await asyncio.gather(*async_coroutines, return_exceptions=True)
 
             return responses
 
@@ -173,9 +174,21 @@ class RequestHandler:
         :return:
         """
         input = []
-        with open(request.input_file, mode='r') as data_file:
-            data = data_file.readlines()
-
-        for i in data:
-            input.append(i.rstrip("\n"))
+        filename = request.input_file
+        extension = os.path.splitext(filename)[1]
+        if _check_inputfile(filename, extension):
+            with open(request.input_file, mode='r') as data_file:
+                data = data_file.readlines()
+            for i in data:
+                input.append(i.rstrip("\n"))
+        else:
+            print("Invalid file. Please enter a existing text file.")
+            quit()
         return input
+
+
+def _check_inputfile(filepath, file_extension):
+    if Path(filepath).exists():
+        if file_extension == ".txt":
+            return True
+    return False

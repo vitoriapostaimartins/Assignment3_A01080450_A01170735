@@ -15,11 +15,12 @@ class PokemonMove(PokedexObject):
 
 
     def __str__(self):
-        return f"\nName: {self._name} \n" \
+        return f"Name: {self.name} \n" \
+               f"ID: {self.id} \n"\
                f"Generation: {self._generation} \n" \
                f"Accuracy: {self._accuracy} \n" \
-               f"pp: {self._pp} \n" \
+               f"PP: {self._pp} \n" \
                f"Power: {self._power} \n" \
                f"Type: {self._type} \n" \
                f"Damage Class: {self._damage_class} \n" \
-               f"Effect Short: {self._effect_short}"
+               f"Effect (Short): {self._effect_short}\n"

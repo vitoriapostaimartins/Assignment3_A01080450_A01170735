@@ -1,0 +1,248 @@
+Timestamp: 14/04/2021 12:58
+Number of requests: 3
+
+Request 1
+--------------------------
+
+Name: pikachu
+Id: 25 
+Height: 4 decimetres
+Weight: 60 hectograms
+Types: electric
+
+Stats:
+------
+('hp', 35)
+('attack', 55)
+('defense', 40)
+('special-attack', 50)
+('special-defense', 50)
+('speed', 90)
+
+Abilities:
+------
+static
+lightning-rod 
+
+Moves:
+------
+('name: mega-punch', 'level_learnt: 0') 
+('name: pay-day', 'level_learnt: 0') 
+('name: thunder-punch', 'level_learnt: 0') 
+('name: slam', 'level_learnt: 20') 
+('name: mega-kick', 'level_learnt: 0') 
+('name: headbutt', 'level_learnt: 0') 
+('name: body-slam', 'level_learnt: 0') 
+('name: take-down', 'level_learnt: 0') 
+('name: double-edge', 'level_learnt: 0') 
+('name: tail-whip', 'level_learnt: 6') 
+('name: growl', 'level_learnt: 1') 
+('name: surf', 'level_learnt: 0') 
+('name: submission', 'level_learnt: 0') 
+('name: counter', 'level_learnt: 0') 
+('name: seismic-toss', 'level_learnt: 0') 
+('name: strength', 'level_learnt: 0') 
+('name: thunder-shock', 'level_learnt: 1') 
+('name: thunderbolt', 'level_learnt: 0') 
+('name: thunder-wave', 'level_learnt: 9') 
+('name: thunder', 'level_learnt: 43') 
+('name: dig', 'level_learnt: 0') 
+('name: toxic', 'level_learnt: 0') 
+('name: agility', 'level_learnt: 33') 
+('name: quick-attack', 'level_learnt: 16') 
+('name: rage', 'level_learnt: 0') 
+('name: mimic', 'level_learnt: 0') 
+('name: double-team', 'level_learnt: 0') 
+('name: defense-curl', 'level_learnt: 0') 
+('name: light-screen', 'level_learnt: 50') 
+('name: reflect', 'level_learnt: 0') 
+('name: bide', 'level_learnt: 0') 
+('name: swift', 'level_learnt: 26') 
+('name: skull-bash', 'level_learnt: 0') 
+('name: flash', 'level_learnt: 0') 
+('name: rest', 'level_learnt: 0') 
+('name: substitute', 'level_learnt: 0') 
+('name: snore', 'level_learnt: 0') 
+('name: curse', 'level_learnt: 0') 
+('name: protect', 'level_learnt: 0') 
+('name: mud-slap', 'level_learnt: 0') 
+('name: zap-cannon', 'level_learnt: 0') 
+('name: detect', 'level_learnt: 0') 
+('name: endure', 'level_learnt: 0') 
+('name: rollout', 'level_learnt: 0') 
+('name: swagger', 'level_learnt: 0') 
+('name: spark', 'level_learnt: 26') 
+('name: attract', 'level_learnt: 0') 
+('name: sleep-talk', 'level_learnt: 0') 
+('name: return', 'level_learnt: 0') 
+('name: frustration', 'level_learnt: 0') 
+('name: dynamic-punch', 'level_learnt: 0') 
+('name: iron-tail', 'level_learnt: 0') 
+('name: hidden-power', 'level_learnt: 0') 
+('name: rain-dance', 'level_learnt: 0') 
+('name: rock-smash', 'level_learnt: 0') 
+('name: facade', 'level_learnt: 0') 
+('name: focus-punch', 'level_learnt: 0') 
+('name: helping-hand', 'level_learnt: 0') 
+('name: brick-break', 'level_learnt: 0') 
+('name: knock-off', 'level_learnt: 0') 
+('name: secret-power', 'level_learnt: 0') 
+('name: signal-beam', 'level_learnt: 0') 
+('name: covet', 'level_learnt: 0') 
+('name: shock-wave', 'level_learnt: 0') 
+('name: natural-gift', 'level_learnt: 0') 
+('name: feint', 'level_learnt: 29') 
+('name: fling', 'level_learnt: 0') 
+('name: magnet-rise', 'level_learnt: 0') 
+('name: discharge', 'level_learnt: 37') 
+('name: captivate', 'level_learnt: 0') 
+('name: grass-knot', 'level_learnt: 0') 
+('name: charge-beam', 'level_learnt: 0') 
+('name: electro-ball', 'level_learnt: 18') 
+('name: round', 'level_learnt: 0') 
+('name: echoed-voice', 'level_learnt: 0') 
+('name: volt-switch', 'level_learnt: 0') 
+('name: electroweb', 'level_learnt: 0') 
+('name: wild-charge', 'level_learnt: 0') 
+('name: play-nice', 'level_learnt: 7') 
+('name: confide', 'level_learnt: 0') 
+('name: nuzzle', 'level_learnt: 23')
+
+
+Request 2
+--------------------------
+
+Name: ditto
+Id: 132 
+Height: 3 decimetres
+Weight: 40 hectograms
+Types: normal
+
+Stats:
+------
+('hp', 48)
+('attack', 48)
+('defense', 48)
+('special-attack', 48)
+('special-defense', 48)
+('speed', 48)
+
+Abilities:
+------
+limber
+imposter 
+
+Moves:
+------
+('name: transform', 'level_learnt: 1')
+
+
+Request 3
+--------------------------
+
+Name: charmeleon
+Id: 5 
+Height: 11 decimetres
+Weight: 190 hectograms
+Types: fire
+
+Stats:
+------
+('hp', 58)
+('attack', 64)
+('defense', 58)
+('special-attack', 80)
+('special-defense', 65)
+('speed', 80)
+
+Abilities:
+------
+blaze
+solar-power 
+
+Moves:
+------
+('name: mega-punch', 'level_learnt: 0') 
+('name: fire-punch', 'level_learnt: 0') 
+('name: thunder-punch', 'level_learnt: 0') 
+('name: scratch', 'level_learnt: 1') 
+('name: swords-dance', 'level_learnt: 0') 
+('name: cut', 'level_learnt: 0') 
+('name: mega-kick', 'level_learnt: 0') 
+('name: headbutt', 'level_learnt: 0') 
+('name: body-slam', 'level_learnt: 0') 
+('name: take-down', 'level_learnt: 0') 
+('name: double-edge', 'level_learnt: 0') 
+('name: leer', 'level_learnt: 15') 
+('name: growl', 'level_learnt: 1') 
+('name: ember', 'level_learnt: 1') 
+('name: flamethrower', 'level_learnt: 42') 
+('name: submission', 'level_learnt: 0') 
+('name: counter', 'level_learnt: 0') 
+('name: seismic-toss', 'level_learnt: 0') 
+('name: strength', 'level_learnt: 0') 
+('name: dragon-rage', 'level_learnt: 0') 
+('name: fire-spin', 'level_learnt: 56') 
+('name: dig', 'level_learnt: 0') 
+('name: toxic', 'level_learnt: 0') 
+('name: rage', 'level_learnt: 24') 
+('name: mimic', 'level_learnt: 0') 
+('name: double-team', 'level_learnt: 0') 
+('name: smokescreen', 'level_learnt: 13') 
+('name: defense-curl', 'level_learnt: 0') 
+('name: reflect', 'level_learnt: 0') 
+('name: bide', 'level_learnt: 0') 
+('name: fire-blast', 'level_learnt: 0') 
+('name: swift', 'level_learnt: 0') 
+('name: skull-bash', 'level_learnt: 0') 
+('name: rest', 'level_learnt: 0') 
+('name: rock-slide', 'level_learnt: 0') 
+('name: slash', 'level_learnt: 33') 
+('name: substitute', 'level_learnt: 0') 
+('name: snore', 'level_learnt: 0') 
+('name: curse', 'level_learnt: 0') 
+('name: protect', 'level_learnt: 0') 
+('name: scary-face', 'level_learnt: 27') 
+('name: mud-slap', 'level_learnt: 0') 
+('name: outrage', 'level_learnt: 0') 
+('name: endure', 'level_learnt: 0') 
+('name: swagger', 'level_learnt: 0') 
+('name: fury-cutter', 'level_learnt: 0') 
+('name: attract', 'level_learnt: 0') 
+('name: sleep-talk', 'level_learnt: 0') 
+('name: return', 'level_learnt: 0') 
+('name: frustration', 'level_learnt: 0') 
+('name: dynamic-punch', 'level_learnt: 0') 
+('name: dragon-breath', 'level_learnt: 0') 
+('name: iron-tail', 'level_learnt: 0') 
+('name: metal-claw', 'level_learnt: 13') 
+('name: hidden-power', 'level_learnt: 0') 
+('name: sunny-day', 'level_learnt: 0') 
+('name: rock-smash', 'level_learnt: 0') 
+('name: heat-wave', 'level_learnt: 0') 
+('name: will-o-wisp', 'level_learnt: 0') 
+('name: facade', 'level_learnt: 0') 
+('name: focus-punch', 'level_learnt: 0') 
+('name: brick-break', 'level_learnt: 0') 
+('name: secret-power', 'level_learnt: 0') 
+('name: overheat', 'level_learnt: 0') 
+('name: rock-tomb', 'level_learnt: 0') 
+('name: aerial-ace', 'level_learnt: 0') 
+('name: dragon-claw', 'level_learnt: 0') 
+('name: natural-gift', 'level_learnt: 0') 
+('name: fling', 'level_learnt: 0') 
+('name: dragon-pulse', 'level_learnt: 0') 
+('name: shadow-claw', 'level_learnt: 0') 
+('name: fire-fang', 'level_learnt: 28') 
+('name: captivate', 'level_learnt: 0') 
+('name: hone-claws', 'level_learnt: 0') 
+('name: flame-burst', 'level_learnt: 32') 
+('name: flame-charge', 'level_learnt: 0') 
+('name: round', 'level_learnt: 0') 
+('name: echoed-voice', 'level_learnt: 0') 
+('name: incinerate', 'level_learnt: 0') 
+('name: inferno', 'level_learnt: 54') 
+('name: fire-pledge', 'level_learnt: 0') 
+('name: work-up', 'level_learnt: 0') 
+('name: confide', 'level_learnt: 0') 
+('name: power-up-punch', 'level_learnt: 0')

@@ -18,7 +18,9 @@ class PokemonAbility(PokedexObject):
 
         pokemon_str = ", ".join(self.pokemon)
 
-        return f"\nGeneration: {self._generation} \n" \
+        return f"Name: {self.name}\n" \
+               f"ID: {self.id} \n" \
+               f"Generation: {self._generation} \n" \
                f"Effect: {self._effect} \n" \
                f"Effect Short: {self._effect_short} \n" \
-               f"Pokemon: {pokemon_str}"
+               f"Pokemon: {pokemon_str}\n"

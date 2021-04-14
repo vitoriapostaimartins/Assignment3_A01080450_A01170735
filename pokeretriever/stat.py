@@ -23,10 +23,9 @@ class PokemonStat(PokedexObject):
             return "N/A"
 
     def __str__(self):
-        return f"\nName: {self.name}\n" \
+        return f"Name: {self.name}\n" \
                f"ID: {self.id}\n" \
                f"Is Battle Only: {self.is_battle_only} \n" \
-               f"Move Damage Class: {self.move_damage_class}"
-
+               f"Move Damage Class: {self.move_damage_class}\n"
 
 

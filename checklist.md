@@ -30,9 +30,9 @@
 - [x] console
 - [ ] format is nicely
 - [x] append information from subqueries if expanded
-- [ ] create a tuple out of key-value pairs
+- [x] create a tuple out of key-value pairs
     - e.g. `Move name: move_value`
-- [ ] output error if there is one
+- [x] output error if there is one
 
 ### Facade and Packages
 - [x] group the following code in a `pokeretriever` package

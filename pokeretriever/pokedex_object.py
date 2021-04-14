@@ -56,7 +56,7 @@ class PokedexObject(abc.ABC):
             base_value = stat.get("base_stat")
             url = stat.get("stat").get("url")
             if not self._expanded:
-                stats.append({"name": name, "base value": base_value})
+                stats.append((f"{name}", base_value))
             else:
                 stats.append({"name": name, "base value": base_value, "url": url})
         return stats
@@ -70,7 +70,7 @@ class PokedexObject(abc.ABC):
             url = ability.get("ability").get("url")
 
             if not self._expanded:
-                abilities.append({"name": name})
+                abilities.append((f"{name}"))
             else:
                 abilities.append({"name": name, "url": url})
 
@@ -86,7 +86,7 @@ class PokedexObject(abc.ABC):
             url = move.get("move").get("url")
             level_learnt = move.get("version_group_details")[0].get("level_learned_at")
             if not self._expanded:
-                moves.append({"name": name, "level_learnt": level_learnt})
+                moves.append((f"name: {name}", f"level_learnt: {level_learnt}"))
             else:
                 moves.append({"name": name, "level_learnt": level_learnt, "url": url})
 
