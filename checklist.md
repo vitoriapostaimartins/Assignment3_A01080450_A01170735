@@ -7,7 +7,7 @@
 
 ## Implementation Requirements
 ### Console Output
-- [ ] format this to look better
+- [x] format this to look better
 
 ### Parseing Arguments
 - [x] input file

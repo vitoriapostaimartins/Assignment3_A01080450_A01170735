@@ -1,29 +1,31 @@
-Timestamp: 14/04/2021 12:58
+Timestamp: 15/04/2021 16:59
 Number of requests: 3
 
 Request 1
 --------------------------
 Name: drizzle
-ID: 2
-Generation: generation-iii
+ID: 2 
+Generation: generation-iii 
 Effect: The weather changes to rain when this Pokémon enters battle and does not end unless replaced by another weather condition.
 
 If multiple Pokémon with this ability, drought, sand stream, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pokémon will stay. 
 Effect Short: Summons rain that lasts indefinitely upon entering battle. 
 Pokemon: politoed, pelipper, kyogre
-
 Request 2
 --------------------------
-Name: sturdyID: 5Generation: generation-iii 
+Name: sturdy
+ID: 5 
+Generation: generation-iii 
 Effect: When this Pokémon is at full HP, any hit that would knock it out will instead leave it with 1 HP.  Regardless of its current HP, it is also immune to the one-hit KO moves: fissure, guillotine, horn drill, and sheer cold.
 
 If this Pokémon is holding a focus sash, this ability takes precedence and the item will not be consumed. 
 Effect Short: Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP. 
 Pokemon: geodude, graveler, golem, magnemite, magneton, onix, sudowoodo, pineco, forretress, steelix, shuckle, skarmory, donphan, nosepass, aron, lairon, aggron, relicanth, regirock, shieldon, bastiodon, bonsly, magnezone, probopass, roggenrola, boldore, gigalith, sawk, dwebble, crustle, tirtouga, carracosta, tyrunt, carbink, bergmite, avalugg, togedemaru, cosmoem, geodude-alola, graveler-alola, golem-alola, togedemaru-totem
-
 Request 3
 --------------------------
-Name: staticID: 9Generation: generation-iii 
+Name: static
+ID: 9 
+Generation: generation-iii 
 Effect: Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being paralyzed.
 
 Pokémon that are immune to electric-type moves can still be paralyzed by this ability.

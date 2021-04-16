@@ -1,27 +1,60 @@
+"""
+This module holds the PokemonObject class and all of its functionalities.
+"""
 import abc
 
 
 class PokedexObject(abc.ABC):
+    """
+    This class represent a PokedexObject and holds its attributes and methods.
+    """
 
     def __init__(self, expanded, **kwargs):
-        self.error = None
+        """
+        Initialize a PokedexObject object with an expanded flag and other attributes that compose the name and the
+        id.
+        :param expanded: a bool
+        :param kwargs: a dict
+        """
+        # self.error = None
         self._name = kwargs.get("name")
         self._id = kwargs.get("id")
         self._expanded = expanded
 
     @property
     def name(self):
+        """
+        Get the name in this object.
+        :return: a String
+        :rtype:
+        """
         return self._name
 
     @property
     def id(self):
+        """
+        Get the id in this object.
+        :return: an int
+        :rtype:
+        """
         return self._id
 
     @property
     def expanded(self):
+        """
+        Get the expanded flag in this object.
+        :return: a bool
+        """
         return self._expanded
 
-    def get_effect(self, effect_string, **kwargs) -> str:
+    @staticmethod
+    def get_effect(effect_string, **kwargs) -> str:
+        """
+        Get the effect from the type of effect and a dictionary to initialize the effect in this object.
+        :param effect_string: a String
+        :param kwargs: a dict
+        :return: a String
+        """
         effect_entries = kwargs.get("effect_entries")
         english_entry = None
         for entry in effect_entries:
@@ -29,9 +62,14 @@ class PokedexObject(abc.ABC):
                 english_entry = entry
         if english_entry is not None:
             return english_entry.get(effect_string)
-        # TODO throw error?
 
-    def get_pokemon_names(self, **kwargs):
+    @staticmethod
+    def get_pokemon_names(**kwargs):
+        """
+        Get pokemon names from a dictionary.
+        :param kwargs: a dict
+        :return: a list of Strings
+        """
         pokemon_list = kwargs.get("pokemon")
 
         pokemon_names = []
@@ -41,11 +79,25 @@ class PokedexObject(abc.ABC):
 
         return pokemon_names
 
+    @staticmethod
+    def get_types(**kwargs):
+        """
+        Get the types attribute from a dictionary.
+        :param kwargs: a dict
+        :return: a list Strings.
+        """
+        types_list = kwargs.get("types")
+        type_names = []
+        for type in types_list:
+            type_names.append(type.get("type").get("name"))
+
+        return type_names
+
     def get_stats(self, **kwargs):
         """
         Gets the name and base value for a Pokemon stat.
-        :param kwargs:
-        :return:
+        :param kwargs: a dict
+        :return: a list of dictionaries if this object is expanded, a list of tuples if it is not
         """
         stat_list = kwargs.get("stats")
 
@@ -62,6 +114,11 @@ class PokedexObject(abc.ABC):
         return stats
 
     def get_abilities(self, **kwargs):
+        """
+        Get abilities from a dictionary.
+        :param kwargs: a dict
+        :return: a list of dictionaries if this object is expanded, a list of tuples if it is not.
+        """
         ability_list = kwargs.get("abilities")
 
         abilities = []
@@ -77,6 +134,11 @@ class PokedexObject(abc.ABC):
         return abilities
 
     def get_moves(self, **kwargs):
+        """
+        Get moves from a dictionary.
+        :param kwargs: a dict
+        :return: a list of dictionaries if this object is expanded, a list of tuples if this object is not expanded.
+        """
         moves_list = kwargs.get("moves")
 
         moves = []
@@ -91,14 +153,3 @@ class PokedexObject(abc.ABC):
                 moves.append({"name": name, "level_learnt": level_learnt, "url": url})
 
         return moves
-
-    def _get_move_object(self, url):
-        pass
-
-    def get_types(self, **kwargs):
-        types_list = kwargs.get("types")
-        type_names = []
-        for type in types_list:
-            type_names.append(type.get("type").get("name"))
-
-        return type_names
