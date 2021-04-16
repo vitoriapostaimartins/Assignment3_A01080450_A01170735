@@ -87,6 +87,7 @@ class StatFactory(PokedexObjectFactory):
         """
         return PokemonStat(expanded, **kwargs)
 
+
 class PokedexTypes(enum.Enum):
     """
     Enum class that holds the types of Pokedex objects.

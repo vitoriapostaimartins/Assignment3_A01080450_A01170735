@@ -6,9 +6,11 @@ import asyncio
 from pokeretriever.request_handler import RequestHandler
 from pokeretriever.request_handler_expanded import ExpandedRequestHandler
 
+
 class Request:
     """
-    This class represents a Request object and is responsible for holding the attributes of a command-line-argument request.
+    This class represents a Request object and is responsible for holding the attributes of a command-line-argument
+    request.
     """
     def __init__(self):
         """

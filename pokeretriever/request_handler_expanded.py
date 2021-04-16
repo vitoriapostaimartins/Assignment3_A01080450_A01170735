@@ -9,7 +9,7 @@ from pokeretriever.pokedex_object_factory import get_pokedex_factory, PokedexTyp
 from pokeretriever.request_handler import RequestHandler
 
 
-class ExpandedRequestHandler():
+class ExpandedRequestHandler:
     """
     This class has helpful static methods that make and retrieve the expandable objects from a expanded request.
     """

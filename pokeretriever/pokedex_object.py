@@ -88,8 +88,8 @@ class PokedexObject(abc.ABC):
         """
         types_list = kwargs.get("types")
         type_names = []
-        for type in types_list:
-            type_names.append(type.get("type").get("name"))
+        for request_type in types_list:
+            type_names.append(request_type.get("type").get("name"))
 
         return type_names
 
@@ -127,7 +127,7 @@ class PokedexObject(abc.ABC):
             url = ability.get("ability").get("url")
 
             if not self._expanded:
-                abilities.append((f"{name}"))
+                abilities.append(f"{name}")
             else:
                 abilities.append({"name": name, "url": url})
 

@@ -41,16 +41,16 @@ class RequestHandler:
     def request(self):
         return self._request
 
-    async def _get_pokedex_object(self, input: str, url: str, session: aiohttp.ClientSession):
+    async def _get_pokedex_object(self, request_input: str, url: str, session: aiohttp.ClientSession):
         """
         Get the Pokedex object from the API via a GET request.
-        :param input: name or id (a String or an int)
+        :param request_input: name or id (a String or an int)
         :param url: a String
         :param session: a ClientSession
         :return: a PokedexObject
         """
 
-        target_url = url.format(self.request.mode, input)
+        target_url = url.format(self.request.mode, request_input)
 
         response = await session.request(method="GET", url=target_url)
 
@@ -97,8 +97,8 @@ class RequestHandler:
             print("Getting pokedex object...\n")
 
             # process each request
-            async_coroutines = [self._get_pokedex_object(input, url, session)
-                                for input in inputs]
+            async_coroutines = [self._get_pokedex_object(request_input, url, session)
+                                for request_input in inputs]
 
             responses = await asyncio.gather(*async_coroutines, return_exceptions=True)
             return responses
@@ -108,18 +108,18 @@ class RequestHandler:
         Get lines of input from an input file as a list.
         :return: a list
         """
-        input = []
+        request_input = []
         filename = self.request.input_file
         extension = os.path.splitext(filename)[1]
         if RequestHandler.check_inputfile(filename, extension):
             with open(self.request.input_file, mode='r') as data_file:
                 data = data_file.readlines()
             for i in data:
-                input.append(i.rstrip("\n"))
+                request_input.append(i.rstrip("\n"))
         else:
             print("Invalid file. Please enter a existing text file.")
             quit()
-        return input
+        return request_input
 
     @staticmethod
     def check_inputfile(filepath, file_extension):
@@ -133,4 +133,3 @@ class RequestHandler:
             if file_extension == ".txt":
                 return True
         return False
-

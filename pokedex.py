@@ -8,8 +8,8 @@ from pokedex_facade import Facade, Request
 from datetime import datetime
 
 
-def main(request: Request):
-    print(request)
+def main(args_request: Request):
+    print(args_request)
     """
     Pass the request to a Facade and handle the PokedexObjects returned.
     :param request: a Request
@@ -31,7 +31,7 @@ _,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.
     """)
     facade = Facade()
 
-    pokedex_objects = facade.execute_request(request)
+    pokedex_objects = facade.execute_request(args_request)
     handle_responses(pokedex_objects)
 
 
@@ -57,17 +57,17 @@ def handle_responses(pokedex_objects):
     _print_request(request, data)
 
 
-def _print_request(request, data):
+def _print_request(args_request, data):
     """
     Check whether the data should be printed to a file or console.
     If output is to the console, print it. Else, pass it to the
     print_to_file method.
-    :param request: a Request
+    :param args_request: a Request
     :param data: a string
     """
-    if request.output != 'print':
-        print_to_file(request, data)
-        print(f"Printed Pokedex objects to: {request.output}")
+    if args_request.output != 'print':
+        print_to_file(args_request, data)
+        print(f"Printed Pokedex objects to: {args_request.output}")
     else:
         print(data)
         print("Finished printing Pokedex objects.")
@@ -76,24 +76,23 @@ def _print_request(request, data):
 def check_outputfile(file_extension):
     """
     Validate the file entered by a user.
-    :param path: a string
     :param file_extension: a string
     :return: True if filename is valid, False otherwise
     """
     return file_extension == ".txt"
 
 
-def print_to_file(request, data):
+def print_to_file(args_request, data):
     """
     Print the data passed in to the output file specified in the request.
     Throw an error if the output file is invalid.
-    :param request: a Request
+    :param args_request: a Request
     :param data: a string
     """
-    filename = request.output
+    filename = args_request.output
     extension = os.path.splitext(filename)[1]
     if check_outputfile(extension):
-        with open(request.output, mode='w', encoding="utf-8") as data_file:
+        with open(args_request.output, mode='w', encoding="utf-8") as data_file:
             data_file.write(data)
     else:
         print("Invalid output file. Please enter a text file or 'print' as the output.")
@@ -124,13 +123,13 @@ def parse_arguments() -> Request:
     # Create a Request object from the parsed arguments
     try:
         args = parser.parse_args()
-        request = Request()
-        request.mode = args.mode
-        request.input_file = args.inputfile
-        request.input_data = args.inputdata
-        request.expanded = args.expanded
-        request.output = args.output
-        return request
+        args_request = Request()
+        args_request.mode = args.mode
+        args_request.input_file = args.inputfile
+        args_request.input_data = args.inputdata
+        args_request.expanded = args.expanded
+        args_request.output = args.output
+        return args_request
     except Exception as e:
         print(f"Error! Could not read arguments.\n{e}")
         quit()
