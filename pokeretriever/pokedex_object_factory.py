@@ -2,6 +2,7 @@
 This module holds the factories that make PokedexObjects.
 """
 import abc
+import enum
 
 from pokeretriever.pokedex_object import PokedexObject
 from pokeretriever.ability import PokemonAbility
@@ -85,3 +86,27 @@ class StatFactory(PokedexObjectFactory):
         :return: a PokemonStat
         """
         return PokemonStat(expanded, **kwargs)
+
+class PokedexTypes(enum.Enum):
+    """
+    Enum class that holds the types of Pokedex objects.
+    """
+    POKEMON = "pokemon"
+    ABILITY = "ability"
+    MOVE = "move"
+    STAT = "stat"
+
+
+def get_pokedex_factory(pokedex_type) -> PokedexObjectFactory:
+    """
+    Get a PokedexObject factory according to the type of object that we wish to get an instance of.
+    :param pokedex_type: a PokedexTypes Enum item
+    :return: a PokedexObjectFactory
+    """
+    pokedex_factories = {
+        PokedexTypes.POKEMON.value: PokemonFactory(),
+        PokedexTypes.ABILITY.value: AbilityFactory(),
+        PokedexTypes.MOVE.value: MoveFactory(),
+        PokedexTypes.STAT.value: StatFactory()
+    }
+    return pokedex_factories[pokedex_type]

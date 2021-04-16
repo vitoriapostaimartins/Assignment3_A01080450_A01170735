@@ -1,9 +1,10 @@
 """
 This module holds the Request class, as well as the Facade class.
 """
+import asyncio
 
 from pokeretriever.request_handler import RequestHandler
-
+from pokeretriever.request_handler_expanded import ExpandedRequestHandler
 
 class Request:
     """
@@ -112,10 +113,22 @@ class Facade:
         """
         Execute a Request that is made by the User using a RequestHandler.
         :param request: a Request
-        :return: a list of PokedexObject objects
+        :return: a list of PokedexObject object
         """
-        request_handler = RequestHandler()
 
-        pokedex_objects = request_handler.execute_request(request)
+        request_handler = RequestHandler(request)
+        expanded_handler = ExpandedRequestHandler(request)
+
+        loop = asyncio.get_event_loop()
+
+        # Process list of requests to get list of responses
+        pokedex_objects = loop.run_until_complete(request_handler.process_requests())
+
+        for pokedex_object in pokedex_objects:
+            try:
+                if pokedex_object.expanded:
+                    loop.run_until_complete(expanded_handler.make_expanded_objects(pokedex_object))
+            except AttributeError:
+                continue
 
         return pokedex_objects
